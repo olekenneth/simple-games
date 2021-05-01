@@ -43,7 +43,7 @@ var Game = function(eventhub) {
   }
 
   async function decideWinner() {
-    let stateCopy = [].concat(state.map((r) => r.filter((e) => e !== '❓')));
+    let stateCopy = [].concat(state);
 
     if (stateCopy.flat().length === 0) {
       throw Error('Not finished');
@@ -59,7 +59,7 @@ var Game = function(eventhub) {
 
     for(let i in winningScenarios) {
       let r = winningScenarios[i];
-      if (new Set(r).size === 1 && r.length === state[0].length) {
+      if (new Set(r).size === 1 && r.length === state[0].length && r[0] !== '❓') {
         console.log('We got a winner', r[0]);
         return r[0];
       }
