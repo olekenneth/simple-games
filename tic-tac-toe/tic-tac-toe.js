@@ -131,7 +131,7 @@ var load = function (w, d, s, cb) {
   a.src = s;
   b.parentNode.insertBefore(a, b);
 };
-load(window, document, '//cdn.vgc.no/js/libs/eventhub-js/eventhub.umd.js?_3', () => {
+load(window, document, 'https://cdn.vgc.no/js/libs/eventhub-js/eventhub.umd.js?_3', () => {
   let eventhub = new Eventhub('wss://direktehub.vg.no', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFkIjpbInR0dC8jIl0sIndyaXRlIjpbInR0dC8jIl19._z2FcA2SRzk-10ORwdLYy427eu36MzFMjp3l2bYA2hI');
   eventhub.connect().then(() => new Game(eventhub));
 });
