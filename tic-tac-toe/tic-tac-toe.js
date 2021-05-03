@@ -16,13 +16,27 @@ var Game = function(eventhub) {
 
     decideWinner()
       .then((winner) => {
-        gameLock = true;
         window.alert('Winner is ' + winner);
-        eventhub.unsubscribeAll();
-        new Game(eventhub);
+        restartGame();
       })
-      .catch(decideNextPlayer);
+      .catch(() => {
+        decideIfDraw();
+        decideNextPlayer();
+      });
   };
+
+  function decideIfDraw() {
+    if (state.flat().filter((e) => e !== '❓').length === state.flat().length) {
+      window.alert('The game is draw. Good work. Press OK to restart game');
+      restartGame();
+    }
+  }
+
+  function restartGame() {
+    gameLock = true;
+    eventhub.unsubscribeAll();
+    new Game(eventhub);
+  }
 
   function publishState() {
     if (!gameId) return;
