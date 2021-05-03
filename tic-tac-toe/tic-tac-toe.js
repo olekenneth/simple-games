@@ -59,10 +59,6 @@ var Game = function(eventhub) {
   async function decideWinner() {
     let stateCopy = [].concat(state);
 
-    if (stateCopy.flat().length === 0) {
-      throw Error('Not finished');
-    }
-
     let winningScenarios = []
         .concat(stateCopy)
         .concat(stateCopy.map((r, i) => stateCopy.map((rr) => rr[i])))
@@ -99,6 +95,8 @@ var Game = function(eventhub) {
       playerId: playerId,
     }));
   }
+
+  console.log('%cWaiting for other participants to join...', 'color: red; font-weight:bold; margin:0; font-size: 24px');
 
   // Listen for handshakes and games to join
   eventhub.subscribe('ttt/games/' + playerId, function (data) {
